@@ -70,6 +70,15 @@ const ApiData = () => {
     SetTxt5(jsonData);
   };
 
+  const deleteLogFilesNow=async()=>{
+    const response = await fetch('/api/deleteLogFiles?query=All', {
+      method: 'GET',
+    });
+    if (!response.ok) {
+      console.log(new Error('Network response was not ok'));
+    }
+  }
+
   useEffect(() => {
     // startTranscoding();
   }, []);
@@ -100,6 +109,9 @@ const ApiData = () => {
           Start Deleting log files
         </button>
         {txt5}
+        <button onClick={deleteLogFilesNow}>
+          Delete log files Now
+        </button>
       </div>
 
       <div>

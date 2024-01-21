@@ -81,7 +81,7 @@ const query_MakeProxy_UploadtoS3_Delete = async () => {
   if (videoFiles.length === 0) {
     const mediaForProxy = await excuteQuery({
       query:
-        "SELECT * FROM  media where  ((FilenameProxy1 is  NULL or FilenameProxy1='') or proxyready=0)  and  UploadStatus=1 and MediaType='Video' ORDER BY MediaUploadedTime DESC",
+        "SELECT * FROM  media where proxyready=0 and  UploadStatus=1 and MediaType='Video' ORDER BY MediaUploadedTime DESC",
     });
     mediaForProxy.forEach((element) => {
       videoFiles.push(element.FILENAMEASUPLOADED);
@@ -90,7 +90,7 @@ const query_MakeProxy_UploadtoS3_Delete = async () => {
     // udpadte database to proxyready='-1' so that other qury shouldnot find that
     await excuteQuery({
       query:
-        "update media set proxyready='-1' where ( (FilenameProxy1 is  NULL or FilenameProxy1='') or proxyready=0)   and  UploadStatus=1 and MediaType='Video'",
+        "update media set proxyready='-1' where  proxyready=0 and  UploadStatus=1 and MediaType='Video'",
     });
 
     for (const { MediaID, MediaExt } of mediaForProxy) {

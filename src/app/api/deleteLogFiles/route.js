@@ -50,6 +50,12 @@ const deleteFiles = (minutes) => {
 
 const dd = cron.schedule('* * * * *', () => deleteFiles(60));
 export async function GET(req, res) {
+  const searchParams = req.nextUrl.searchParams
+  const query = searchParams.get('query')
+  if (query==='All'){
+    console.log(query);
+  deleteFiles(0.0000001);
+  }
   deleteFiles(60);
   const response = new Response(JSON.stringify('file deletion Started'));
   return response;
