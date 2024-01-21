@@ -6,8 +6,7 @@ import { deleteAFile } from '../common';
 
 var cron = require('node-cron');
 
-
-console.log(logpath)
+const logpath = process.env.logpath1;
 const ffmpegpath = process.env.ffmpegpath1;
 
 const proxy1location = process.env.proxy1location1;
